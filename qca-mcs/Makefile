@@ -25,6 +25,9 @@ define KernelPackage/qca-mcs
   TITLE:=QCA Multicast Snooping Support
   DEPENDS:=+@KERNEL_IPV6_MROUTE +@KERNEL_IP_MROUTE
   KCONFIG:=CONFIG_NETFILTER=y
+ifeq ($(CONFIG_LINUX_6_6),y)
+  KCONFIG+=CONFIG_BRIDGE_NETFILTER=y
+endif
   FILES:=$(PKG_BUILD_DIR)/qca-mcs.ko
   AUTOLOAD:=$(call AutoLoad,41,qca-mcs)
 endef
